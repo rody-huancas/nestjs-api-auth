@@ -1,18 +1,12 @@
-import {
-  BadRequestException,
-  Injectable,
-  InternalServerErrorException,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { JwtService } from '@nestjs/jwt';
-import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Repository } from 'typeorm';
+import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
+import { BadRequestException, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
-import { throws } from 'assert';
-import { CreateUserDto } from './dto/create-auth.dto';
 import { LoginUserDto } from './dto/login-user.dto';
+import { CreateUserDto } from './dto/create-auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -79,5 +73,9 @@ export class AuthService {
 
     console.log(error);
     throw new InternalServerErrorException('Please check server logs');
+  }
+
+  findAll() {
+    return this.userRepository.find();
   }
 }
