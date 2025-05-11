@@ -31,6 +31,11 @@ export class AuthController {
     return this.authService.checkAuthStatus(user);
   }
 
+  @Get('all')
+  findAll() {
+    return this.authService.findAll();
+  }
+
   @Get('private')
   @UseGuards(AuthGuard())
   testingPrivateRoute(
